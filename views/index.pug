@@ -1,0 +1,13 @@
+extends main
+
+block content
+  div(class="row justify-content-center" style="margin-top:10px;")
+    h1 Shorty URL
+  div(class="col-lg-5 col-10" style="margin:0 auto;margin-top:20px;")
+    div(class="alert alert-danger inactive" role="alert")
+    div(class="alert alert-success inactive" role="alert")
+    form(id="urlForm")
+      div(class="form-group")
+        label(for="url") Please enter the URL you would like to shorten
+        input(type="text" class="form-control" name="url" id="url" placeholder="URL")
+      button(type="submit" class="btn btn-primary btn-lg btn-block") Submit
