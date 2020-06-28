@@ -10,6 +10,7 @@ Nano ID was utilized to generate unique, truncated URL's.
   <li>Clone repo: <code>git clone https://github.com/mebratumd/shortyURL.git</code></li>
   <li>Navigate to the root directory</li>
   <li>Install required dependencies: <code>npm install</code></li>
+  <li>Update <code>MONGO_URI</code> in the .env file with your connection URI.</li>
   <li>Start local server: <code>npm start</code></li>
 </ol>
 
