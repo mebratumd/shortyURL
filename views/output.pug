@@ -1,0 +1,21 @@
+extends main
+
+block content
+  div(class="row justify-content-center" style="margin-top:10px;")
+    div(class="col-10" style="margin:0 auto;margin-top:20px;text-align:center;")
+      h1 Shorty URL
+      h3
+        a(href="/") Home
+    div(class="col-10" style="margin:0 auto;margin-top:20px;text-align:center;")
+      div
+        b Original URL:
+        span  #{data.originalURL}
+      div
+        b New URL:
+        span  http://localhost:5000/#{data.newURL}
+      div
+        b Date of Registration:
+        span  #{data.date}
+      div
+        b Total redirects:
+        span  #{data.counter}

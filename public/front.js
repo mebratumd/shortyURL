@@ -9,7 +9,7 @@ window.onload = () => {
 
     $event.preventDefault();
 
-    const response = await fetch("http://localhost:5000/short",{
+    const response = await fetch("http://localhost:5000/short", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-})
+});
 
 mongoose.connection.once('open',() => {
   console.log("Database connected...");
@@ -31,7 +31,7 @@ app.get("/", (req,res) => {
 
 });
 
-app.post("/short",[check('url').isURL().withMessage('Invalid URL.').matches(/^https?/).withMessage('Invalid URL.')],async (req,res) => {
+app.post("/short",[check('url').isURL().withMessage('Invalid URL.').matches(/^https?/).withMessage('Invalid URL.')], async (req,res) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -42,7 +42,7 @@ app.post("/short",[check('url').isURL().withMessage('Invalid URL.').matches(/^ht
 
   if (url.length > 0) {
 
-    return res.json({success:true,truncated:`http://localhost:5000/${url[0].newURL}`});
+    return res.status(200).json({success:true,truncated:`http://localhost:5000/${url[0].newURL}`});
 
   } else {
 
@@ -51,9 +51,9 @@ app.post("/short",[check('url').isURL().withMessage('Invalid URL.').matches(/^ht
       newURL: nanoid()
     });
 
-    let shortyURL = await newUrl.save()
+    let shortyURL = await newUrl.save();
 
-    return res.json({success:true,truncated:`http://localhost:5000/${shortyURL.newURL}`});
+    return res.status(201).json({success:true,truncated:`http://localhost:5000/${shortyURL.newURL}`});
 
   }
 
@@ -61,23 +61,40 @@ app.post("/short",[check('url').isURL().withMessage('Invalid URL.').matches(/^ht
 
 app.get("/:id", async (req,res) => {
 
-  let url = await Shorty.findOne({newURL:req.params.id});
+  let url = await Shorty.findOne({newURL:req.params.id}).exec();
 
   if (url) {
+    url.counter++;
+    await url.save();
     return res.redirect(url.originalURL);
   } else {
-    return res.render('notfound',{title:'Shorty URL | Not Found'});
+    return res.status(404).render('notfound',{title:'Shorty URL | Not Found'});
   }
 
 });
 
-app.get("*", (req,res) => {
 
-  return res.render('notfound',{title:'Shorty URL | Not Found'});
+app.get("/stats/:id", async (req,res) => {
+
+  let url = await Shorty.findOne({newURL:req.params.id}).exec();
+
+  if (url) {
+    return res.status(200).render('output',{data:url,title:'Shorty URL | Data'});
+  } else {
+    return res.status(404).render('notfound',{title:'Shorty URL | Not Found'});
+  }
 
 });
 
 
-app.listen(process.env.PORT,()=>{
-  console.log(`Listening on port ${process.env.PORT}...`);
+
+app.get("*", (req,res) => {
+
+  return res.status(404).render('notfound',{title:'Shorty URL | Not Found'});
+
+});
+
+
+app.listen(5000,() => {
+  console.log(`Listening on port 5000...`);
 });
