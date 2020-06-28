@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
-const cors = require('cors');
 const path = require('path');
 const { check,validationResult } = require('express-validator');
 const Shorty = require('./models/url.js');
