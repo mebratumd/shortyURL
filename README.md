@@ -17,6 +17,11 @@ Nano ID was utilized to generate unique, truncated URL's.
 
 <code>POST /short</code><br>
 Accepts JSON payload with a <code>url</code> parameter set to whatever URL you wish to truncate.<br><br>
+<p>
+  {
+    url: "https://www.selectpolling.ca"
+  }
+</p>
 <b>Returns</b>
 | Status code | Interpretation | Result |
 | :--: | :--: | :--: |
