@@ -1,8 +1,17 @@
 # shortyURL
 
-URL shortener built with Express JS, MongoDB, and Bootstrap. 
+A URL shortener built with Express JS, MongoDB, and Bootstrap.
 
-Nano ID was utilized to generate unique, truncated URL's. 
+Nano ID was utilized to generate unique, truncated URL's.
+
+# Use
+
+<ol>
+  <li>Clone repo: <code>git clone https://github.com/mebratumd/shortyURL.git</code></li>
+  <li>Navigate to the root directory</li>
+  <li>Install required dependencies: <code>npm install</code></li>
+  <li>Start local server: <code>nodemon app.js</code></li>
+</ol>
 
 # API Documentaiton
 
